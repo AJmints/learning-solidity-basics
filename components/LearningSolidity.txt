@@ -1,0 +1,1 @@
+This components folder is being used to record my journey with learning Solidity.

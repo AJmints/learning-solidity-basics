@@ -1,0 +1,14 @@
+
+CHAPTER 2
+
+We can deploy contracts from other contracts, and we can interact with those
+deployed contracts. Having contracts interacting with each other is an essential 
+comoponent of Solidity. This concept of contracts seemlessly interacting with each
+other is called Composability. Smart contracts are composable because they 
+can easily interact with each other.
+
+Composability is how seemlessly a contract and interact with another contract.
+
+Composability is essential with DeFi, since our contracts can interact with these complex 
+financial products. All their code is available onchain, so that is what makes it 
+possible to interact with various DeFi products.

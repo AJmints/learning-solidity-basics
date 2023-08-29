@@ -9,6 +9,7 @@ contract BasicArrays {
     object, I am defining the parameters of the People class using the struct as my interface */
     People public person = People({favoriteNumber: 2, name: "Alex"});
 
+    /* struct is an interface to create new types, beyone the primitives */
     struct People {
         uint256 favoriteNumber;
         string name;
@@ -24,7 +25,7 @@ contract BasicArrays {
         People memory newPerson = People({favoriteNumber: _favoriteNumber, name: _name});
         peopleList.push(newPerson);
 
-        // You can condense 24 and 25 into - peopleList.push(People(_favoriteNumber, _name));
+        // You can condense 25 and 26 into - peopleList.push(People(_favoriteNumber, _name));
         // What you want to consider is that you are being less explicit with type casting.
     }
 

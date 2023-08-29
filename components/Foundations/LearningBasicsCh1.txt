@@ -1,0 +1,17 @@
+In this Foundations folder, we are covering the very fundamentals of Solidity.
+
+All the contracts we have written in the solidity-basics-ch1 folder are all deployable
+and would all work on a testnet if deployed. 
+
+
+CHAPTER 1
+
+While following along with the video, https://www.youtube.com/watch?v=gyMwXuJrbJQ
+we learned about the direct-injection option that exist in the Remix - EthereumIDE. 
+We also got a glimps into the api's we would have to call if not deploying through that
+IDE. We will be covering other ways of deploying to the Ethereum Virtual Machine in 
+later lessons. 
+
+We will also be learning about other EVM compatible blockchains, like Avalanche, Fantom,
+Polygon, and more. These other blockchains are EVM compatible, meaning they can read 
+the Solidity language.
