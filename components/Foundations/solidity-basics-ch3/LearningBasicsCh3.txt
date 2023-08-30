@@ -1,0 +1,38 @@
+CHAPTER 3
+
+3.1
+NEW CONCEPTS
+Transaction terminoligy
+
+TRANSACTION - VALUE TRANSFER
+Nonce: tx count for the account
+Gas Price: price per unit of gas (in wei)
+Gas Limit: 21000
+To: address that the tx is ent to
+Value: amount of wei to send
+Data: Empty
+v, r, s: components of a tx signature.
+
+TRANSACTION - FUNCTION CALL
+Nonce: tx count for the account
+Gas Price: price per unit of gas (in wei)
+Gas Limit: max gas that this tx can use
+To: address that the tx is sent to
+Value: amount of wei to send
+Data: What to send to the To address
+v, r, s: components of tx signature
+
+Note: When defining your gas amount, there are a few metrics you 
+can use. Wei, Gwei, Finney, and ether
+When breaking down the value, you can view it as a measure of ether. If you have 
+1 Ether, then you have 1000000000 Gwei, or you have 100000000000000000 Wei. 
+
+
+3.2
+PAYABLE
+
+When you mark a function with the payable keyword, it makes the function readable
+
+Smart contracts can hold funds just like how a wallet can hold funds. Every time a
+contract is deployed, it gets a unique address just like how a wallet is a unique 
+address. Both wallets and contracts can hold the native blockchain token, like Ethereum.
