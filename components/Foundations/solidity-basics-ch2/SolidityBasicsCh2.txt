@@ -1,6 +1,9 @@
 
 CHAPTER 2
 
+2.1
+COMPOSABILITY
+
 We can deploy contracts from other contracts, and we can interact with those
 deployed contracts. Having contracts interacting with each other is an essential 
 comoponent of Solidity. This concept of contracts seemlessly interacting with each
@@ -12,3 +15,33 @@ Composability is how seemlessly a contract and interact with another contract.
 Composability is essential with DeFi, since our contracts can interact with these complex 
 financial products. All their code is available onchain, so that is what makes it 
 possible to interact with various DeFi products.
+
+2.2
+IMPORTING
+
+Importing files into other smart contracts can be seen in StorageFactory.
+
+NOTE: You can have different versions of Solidity on different contracts as long as they are
+both compatible in a later version. For example, in StorageFactory.sol and SimpleStorage.sol,
+we have ^0.8.0 and ^0.8.8. When the code goes to get compiled, the compiler will switch to a 
+later version. In the video example, we see the compiler change to 0.8.13 to run our code. 
+
+NEW CONCEPTS:
+Address - This address referes to the address of a deployed smart contract
+ABI (Application Binary Interface) - An ABI is the interface of a contract that is being 
+called. From what I currently understand, this would be the variables and functions that 
+are public/accessable from a contract.
+
+
+2.3
+INHERITENCE AND OVERRIDES
+
+To view the syntax for inheritence, take a look at ExtraStorage.sol. The key word when 
+inheriting from a parent contract is "is". Now, with the child contract, we can use the 
+override functionallity.
+
+NEW CONCEPTS:
+Virtual - In order to allow a child contract to be able to override a function from the 
+parent contract, the "virtual" keyword must be defined in the parent function that is being
+targeted by the override. Then in the child contract when you redefine the method, you must
+include the override keyword.

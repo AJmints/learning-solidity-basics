@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: MIT
 /* This spdx is declared to remove the warning from VS code, without it, VScode will hilight a warning */
 
-/* Simple storage example */
-/* Simple storage example */
-/* Simple storage example */
 
 /* Select the version of Solidity with this syntax */
 /* The caret (^) says that we can run the declared version of solidity and above */
