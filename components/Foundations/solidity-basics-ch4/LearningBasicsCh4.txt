@@ -1,0 +1,39 @@
+CHAPTER 4 - CHAINLINK AND ORACLES
+
+4.1
+This section, we will cover the oracle network arcitecture. 
+
+Blockchain are deterministic systems. They can't interact with the outside world on their
+own. They need help from an oracle network. 
+
+If a blockchain network wasn't deterministic, there would be many variables that wouldn't
+match up with all the nodes running that network. All the data needs to be the same on all
+the nodes in order for the network to achieve consensus. 
+
+
+4.2 The Oracle Problem
+The issue that oracles solve is called "The Smart Contract Connectivity Problem". The 
+nature of blockchain calls for a a decentralized network for a decentralized system. If we
+used a centralized network, that would be a point of failure that would make the purpose
+of a decentralized network pointless. 
+
+4.3 ChainLink Data Feeds
+How can we connect data with oracles to our smart contracts that interact with the blockchain
+we are using? Chainlink Data Feeds has all sorts of plug and play options that come with it.
+For learning, we are going to be using this service. 
+
+When we are moving tokens around, we need to the value of the tokens on many different 
+platforms. Exchanges are connected to data providers which send this data to Chainlink
+nodes. Once the nodes have the updated information about a various asset, you can make 
+a get call from these nodes through a reference contract. We can then access the information
+through our user contract. 
+
+To see the flow of data in action, you can view data.chain.link. We can then view one of the
+most popular feeds, like ETH/USD and see various stats. The information is updated on the 
+chainlink network when the trigger parameters have been met. 
+
+The data feeds are used by many DeFi exchanges and various other crypto businesses. 
+
+
+
+LEFT OF AT 4:21 ON VIDEO
