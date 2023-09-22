@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "compile": "yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . components/ethers-simple-storage/SimpleStorage.sol"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.6.1",
@@ -20,6 +21,7 @@
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "solc": "0.8.7-fixed",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
   }
