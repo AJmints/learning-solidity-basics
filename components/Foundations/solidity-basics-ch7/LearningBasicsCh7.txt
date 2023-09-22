@@ -1,0 +1,32 @@
+Learning about Gas optimization
+
+Starting with Constant and Immutable
+
+constants use less gas, but should only be used when a variable is meant not to change.
+The naming convention for constant variables is to use caps with underscores for spaces.
+
+Variables we want to set one time can be marked as immutable. We get more gas savings 
+using this keyword.
+The convention is to place an i_ before the variable name.
+
+The reason immutable and constant save gas is because we don't save those variables in 
+a storage slot, but in the byte code of the contract.
+
+Our require statement cost extra gas because we have a string set as the error response
+and each character costs gas. Instead, as of sol 0.8.4, we can declare our error at the 
+top of the contract and call that instead. When we use the if statement to check if 
+our condition is met, we can use the revert keyword to call our error.
+
+//
+
+What happens if someone sends eth to our contract without calling the fund function? How
+could we reward their addresses if we haven't been able to track their wallet address?
+We have 2 functions we can call to handle uncontrolled funding. 
+receive() and fallback()
+
+receive Ether function
+-A contract can have at most one receive function, declared using 
+receive() external payable {...} (without the function keyword). THis function cannot have 
+arguments, cannot return anything and must have external visiblity and payable state 
+mutablitiy. It can be virtual, can override and can have modifiers. Read more at 
+docs.solidity.org - special functions receive and fallback

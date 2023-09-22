@@ -11,6 +11,16 @@ contract FundMe {
     address[] public funders;
     mapping(address => uint256) public addressToAmountFunded; 
 
+    /* Setting up a construtor to set up the owner of this contract 
+    When the contract is called the first time is deployed, we can assign
+    the owner of the contract, then set up our withdraw function to only resond 
+    to the owner of this contract. */
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
     function fund() public payable{
         require(msg.value.getConversionRate() >= miniumUsd, "Didn't send enough!");
         funders.push(msg.sender);
@@ -18,7 +28,7 @@ contract FundMe {
     }
 
     // withdraw function is so the project can access the funds
-    function withdraw() public {
+    function withdraw() public onlyOwner {
         /* starting index, ending index, step amount */
         for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++) { // Normal for loop, but using funderIndex instead of i
             address funder = funders[funderIndex]; // assign selected funder to funder address var
@@ -40,6 +50,12 @@ contract FundMe {
         // call
         (bool callSuccess,) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "Call Failed");
+    }
+
+    modifier onlyOwner {
+        /* If require returns false, then cancel this function for anyone who is not the owner */
+        require(msg.sender == owner, "Sender is not owner!");
+        _;
     }
 
 }

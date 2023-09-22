@@ -3,3 +3,13 @@ https://solidity-by-example.org/
 
 Create our own Library.
 Learn the sol for loop and create withdraw function
+
+Learn how to use constructor.
+Set the owner of the contract (Once set in the constructor, appears to set the 
+contract permenantly)
+Set up the require statement at the top of the withdraw function so only the 
+owner of the contract can withdraw.
+
+Learn about Modifiers
+If a modifier is in the function declaration, the function will check the modifier
+first before exectuing. 
