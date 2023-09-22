@@ -1,1 +1,3 @@
 This components folder is being used to record my journey with learning Solidity.
+
+LEFT OFF AT 4:50

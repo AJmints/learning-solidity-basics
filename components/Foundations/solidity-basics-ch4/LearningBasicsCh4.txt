@@ -35,5 +35,3 @@ chainlink network when the trigger parameters have been met.
 The data feeds are used by many DeFi exchanges and various other crypto businesses. 
 
 
-
-LEFT OF AT 4:21 ON VIDEO

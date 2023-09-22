@@ -1,0 +1,5 @@
+Solidity by Example website - great resource.
+https://solidity-by-example.org/
+
+Create our own Library.
+Learn the sol for loop and create withdraw function
