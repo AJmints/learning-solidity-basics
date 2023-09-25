@@ -1,5 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# blockchainlearning
+/components/ethers-simple-storage/.env
+/components/ethers-simple-storage/.encryptedKey.json
+
 # dependencies
 /node_modules
 /.pnp

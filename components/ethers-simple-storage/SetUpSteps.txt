@@ -31,3 +31,17 @@ pay
 LETS START USING ETHERS
 
 -yarn add ethers
+
+We are using ethers v6 while the video is using v5, so some of the code is different.
+
+
+LEARNING TO ENCRYPT PRIVATE information
+
+We can reference our encyptKey.js file to see how we created our encryptedKey.json file. Now the only way we can unencrypt this file is if we have
+the password when we run our deploy. 
+
+We learned how to use env files and how to set up and make our own env variables through the terminal. We also learned how to clear our history
+In bash:
+$ history    // shows us our history in terminal 
+$ history -c    // clears our history in terminal
+

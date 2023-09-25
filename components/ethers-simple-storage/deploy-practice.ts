@@ -1,27 +1,45 @@
-// import { ethers } from "ethers"  - Doesn't work when I use import
-const ethers = require("ethers")
-const fs = require('fs-extra')
-// import * as fs from 'fs-extra'  - Doesn't work when I use import
-// import "dotevn/config"
+const ethersP = require("ethers")
+const fsP = require('fs-extra')
+require("dotenv").config() // This is an example dotenv file with fake information
 
-async function main() {
-    let provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545") // This connects us to the block chain - updated as of ethers 6 (old format ethers.providers.JsonRpcProvider("") no longer works)
-    const wallet = new ethers.Wallet(
-        "0x8440d11ed9ac82ac876d6ef7e75d391694321412df06a6df57af7dd2c49b03a7", // this gives us a wallet to sign transactions with
-        provider
+async function mainPractice() {
+    /* This is the information we need to prepare our contract for deployment */
+    let provider = new ethersP.JsonRpcProvider(process.env.RPC_URL) // This connects us to the block chain - updated as of ethers 6 (old format ethers.providers.JsonRpcProvider("") no longer works)
+    
+    /* We are not using this approach to save our wallet, instead we are using the approach underneith */
+    // const wallet = new ethers.Wallet(
+    //     // "0xdf8be95cde5554002d4247f234141a839285cf2432e3a256ae394470601a5d58", // this gives us a wallet to sign transactions with (dev private key w/ ganache)
+    //     process.env.PRIVATE_KEY, // we save our private key in an environment variable. 
+    //     provider
+    // )
+
+    // const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf8")
+    // let wallet = ethers.Wallet.fromEncryptedJsonSync( // as of ethers6, we no longer need to use the new keyword when using ethers.Wallet.fromEncrytpedJsonSync
+    //     encryptedJson,
+    //     process.env.PRIVATE_KEY_PASSWORD
+    // )
+    // wallet = await wallet.connect(provider)
+
+    const wallet = new ethersP.Wallet( // Using metamask test key with newly generated wallet
+        process.env.PRIVATE_KEY,
+        provider,
     )
-    const abi = fs.readFileSync("./compiledContracts/components_ethers-simple-storage_SimpleStorage_sol_SimpleStorage.abi", "utf8")
-    const binary = fs.readFileSync("./compiledContracts/components_ethers-simple-storage_SimpleStorage_sol_SimpleStorage.bin", "utf8")
-    const contractFactory = new ethers.ContractFactory(abi, binary, wallet)
 
+    const abi = fsP.readFileSync("./compiledContracts/components_ethers-simple-storage_SimpleStorage_sol_SimpleStorage.abi", "utf8")
+    const binary = fsP.readFileSync("./compiledContracts/components_ethers-simple-storage_SimpleStorage_sol_SimpleStorage.bin", "utf8")
+    const contractFactory = new ethersP.ContractFactory(abi, binary, wallet)
+
+    /* These are the lines of code we need to deploy a contract to the block chain */
     console.log("deploying, plz wait...")
-    const contract = await contractFactory.deploy() 
-    const deploymentReceipt = await contract.deploymentTransaction().wait(1) // Udated as of ethers version 6
+    const contract = await contractFactory.deploy()
+    await contract.deploymentTransaction().wait(1) // Udated as of ethers version 6
+    console.log(`Contract Address: ${contract.target}`)
 
-    console.log("Here is the deployment tranaction (transaction response): ")
-    console.log(contract.deploymentTransaction())
-    console.log("Here is the transaction receipt: ")
-    console.log(deploymentReceipt)
+    // console.log("Here is the deployment tranaction (transaction response): ")
+    // console.log(contract.deploymentTransaction())
+    // console.log("Here is the transaction receipt: ")
+    // console.log(deploymentReceipt)
+
 
     /* 
     This is an example of a RAW transaction. One that we wrote totally ourselve. We will be using ethers and Hardhat to handle our transactions,
@@ -44,6 +62,14 @@ async function main() {
     console.log(sentTxResponse)
 
     */
+
+    /* Accessing our contract after deploying it. */
+    const currentFavoriteNumber = await contract.retrieve();  // When we view our contract, it will come will all the information included in our ABI, that is why we included it with our ContractFactory
+    console.log(`Current favorite number: ${currentFavoriteNumber}`)
+    const transactionResponse = await contract.store("7")
+    const tranactionReceipt = await transactionResponse.wait(1)
+    const updatedFavoriteNumber = await contract.retrieve()
+    console.log(`Updated favorite number: ${updatedFavoriteNumber}`)
 }
 
 main().then(() => process.exit(0)).catch((error) => {

@@ -1,26 +1,3 @@
 -Foundations components folder was used to record my early journey with learning Solidity basics.
 
-
-BRINGING SOL INTO VSCODE
-
-Setting up ethers simple storage component:
--corepack enable
--added yarn
--yarn add solc
--yarn add solc@0.8.7-fixed (to install this globally and not just locally to this folder we would use "yarn global add solc@0.8.7-fixed")
-
-To compile our contract with yarn, this is the command we must enter. Make sure the pragma is the same as the yarn version (or below the yarn version)
--$ yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . components/ethers-simple-storage/SimpleStorage.sol
-
-Our output contains the abi and the bin from the code. We will need these files.
-
-We can change how we aquire our bin and abi by writing adding a script to our package.json file. In our scripts section we added...
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "compile": "yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . components/ethers-simple-storage/SimpleStorage.sol"
-  },
-
-  Now when we want to get the abi and the bin of our contract in that specific route, we just have to enter "yarn compile" in our terminal.
+-ethers-simple-storage in the components folder is where we start using vs code to learn how to set up a real environment. 
