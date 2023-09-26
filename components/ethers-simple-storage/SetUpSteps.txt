@@ -45,3 +45,17 @@ In bash:
 $ history    // shows us our history in terminal 
 $ history -c    // clears our history in terminal
 
+
+VERIFY OUR SMART CONTRACT IN SEPOLIA TESTNET
+
+https://sepolia.etherscan.io/verifyContract-solc?a=0x437dB3133b76890Ca7fcEFDB2286ADcc60f812CF&c=v0.8.7%2bcommit.e28d00a7&lictype=3
+
+Deployed Contract address: 0x437dB3133b76890Ca7fcEFDB2286ADcc60f812CF
+ReadContract: https://sepolia.etherscan.io/address/0x437dB3133b76890Ca7fcEFDB2286ADcc60f812CF#readContract
+
+This link is to our successfully deployed contract. On etherscan, we can now see the methods
+that are associated with our contract. Both read and write. 
+(Later on we will learn how to verify our code in the code editor.)
+
+We can post the contract to any evm chain with this set up. In our env, we just have to change the 
+rpc to the appropriate route. 
