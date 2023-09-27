@@ -28,5 +28,10 @@ contract SimpleStorage {
         nameToFavoriteNumber[_name] = _favoriteNumber; 
     }
 
+    function viewPeople() public view returns(uint256) {
+        uint256 number = peopleList.length;
+        return number;
+    }
+
 
 }

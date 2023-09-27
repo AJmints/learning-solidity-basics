@@ -2918,7 +2918,7 @@
     "@ethersproject/web" "5.7.1"
     "@ethersproject/wordlists" "5.7.0"
 
-"ethers@^6.1.0", "ethers@^6.4.0", "ethers@^6.7.1", "ethers@6.x":
+"ethers@^6.1.0", "ethers@^6.4.0", "ethers@6.7.1", "ethers@6.x":
   "integrity" "sha512-qX5kxIFMfg1i+epfgb0xF4WM7IqapIIu50pOJ17aebkxxa4BacW5jFrQRmCJpDEg2ZK2oNtR5QjrQ1WDBF29dA=="
   "resolved" "https://registry.npmjs.org/ethers/-/ethers-6.7.1.tgz"
   "version" "6.7.1"
@@ -5545,7 +5545,7 @@
     "semver" "^5.5.0"
     "tmp" "0.0.33"
 
-"solidity-coverage@^0.8.1":
+"solidity-coverage@^0.8.1", "solidity-coverage@^0.8.5":
   "integrity" "sha512-6C6N6OV2O8FQA0FWA95FdzVH+L16HU94iFgg5wAFZ29UpLFkgNI/DRR2HotG1bC0F4gAc/OMs2BJI44Q/DYlKQ=="
   "resolved" "https://registry.npmjs.org/solidity-coverage/-/solidity-coverage-0.8.5.tgz"
   "version" "0.8.5"

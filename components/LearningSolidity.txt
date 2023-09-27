@@ -1,3 +1,5 @@
 -Foundations components folder was used to record my early journey with learning Solidity basics.
 
 -ethers-simple-storage in the components folder is where we start using vs code to learn how to set up a real environment. 
+
+-hardhat-simple-storage in the components folder is where we start to learn/explore the hardhat framework

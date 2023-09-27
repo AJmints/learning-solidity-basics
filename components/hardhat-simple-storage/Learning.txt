@@ -11,16 +11,11 @@ yarn hardhat || npx hardhat
 Also will need 
 npm i @nomicfoundation/hardhat-toolbox
 
+Also, check the version of Eth in the hardhat.config.ts/js file compared to your contracts.
+
 And for TypeScript support 
 yarn add --dev ts-node typescript || npm install --save-dev ts-node typescript
 yarn add --dev chai @types/node @types/mocha @types/chai || npm install --save-dev chai @types/node @types/mocha @types/chai
-
-
-NOTE: From the default files created, in the test folder, one method is broken, not sure why
-Line 81:
-    await expect(lock.connect(otherAccount).withdraw()).to.be.revertedWith(
-    "You aren't the owner"
-    );
 
 Also - these were missing from devDependencies:
 "@nomiclabs/hardhat-waffle": "2.0.6",
@@ -36,3 +31,61 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   }
 });
 
+
+ADDING API KEYS AND ENVIRONTMENT VARIABLES
+
+In our hardhat.config.ts file, we have updated and added these new keys.
+defaultNetworks,
+networks,
+etherscan
+
+We have also updated our .env file with an api route for our...
+SEPOLIA_RPC_URL=alchemy project rpc route
+PRIVATE_KEY=testing metamask private keys
+ETHERSCAN_API_KEY=Our api key we generated on etherscan (related to our project)
+
+We can deploy our contract to our testnetwork, but we also want to programatically verify it. With our etherscan
+api key, we can do that. The command we are running in the terminal is...
+npx hardhat verify --network sepolia DEPLOYED_CONTRACT_ADDRESS
+But....
+We are going to update our deploy.ts file and create a verify function.
+
+
+MAKING OUR OWN LOCAL NODE
+
+If we wanted to use our own node (similar to ganache) we would need to run the command...
+npx hardhat node
+
+We now have a HTTP and WebSocket JSON-RPC server at the listed address
+Now we also have a bunch of accounts that we can use for testing purposes
+
+Next we need to update our hardhat.config file with our localhost information.
+
+So while the node is running, open a new bash terminal, cd to the folder where the node is being hosted,
+and run your scripts. You can see information show up on our other terminal where we started our local host node. 
+
+WORKING ON OTHER BLOCKCHAINS THROUGH HARDHAT CONSOLE
+
+To start our hardhat console, we enter....
+npx hardhat console --network <Desired Network>
+
+Inside here, we can execute lines of code directly from our script 
+
+
+TESTING
+
+When running our test with hardhat, we need to run...
+npx hardhat test
+
+If we want to run a specific test, we need to run that command with a specific word defined in the it block. Example: 
+npx hardhat test --grep <word from it block description>
+// grep only can handle one word
+
+We also want to add a new tool to our testing arsenal. You will want to install...
+npm install --save-dev solidity-coverage
+
+SolidityCoverage is a tool to show us how much of our code we have tested. It will also let us know what lines of code 
+we have not tested in our sol contract. 
+
+GasReporter is also a new addition to our hardhat.config file. This will let us know what the current gas cost are
+for deploying our contract and what it cost to call on functions within it.
