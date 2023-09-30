@@ -1,0 +1,65 @@
+SET UP
+*Since we have many of the dependencies already installed from hardhat-simple-storage and Foundations, we don't need to worry about installing too much
+
+First we run...
+npx hardhat
+
+**Added a new package for solhint...
+npm install -g solhint (version 3.6.2)
+
+Once we have our contracts imported/created, we would compile them with the command...
+npx hardhat compile
+
+Might need 
+npm install -D hardhat-deploy
+npm install -D hardhat-deploy-ethers
+
+then in our package.json we have to override under devDependencies...
+"@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
+
+
+MOCKS
+
+What is mocking?
+Answer from stack overflow:
+Mocking is primarily used in unit testing. An object under test may have dependencies on other (complex) objects. To isolate
+the behavior of the object you want to replace the other objects by mocks that simulate the behavior of the real objects. 
+This is useful if the real objects are impractical to incorporate into the unit test.
+
+In short, mocking is creating objects that simulate the behavior of real objects.
+
+
+SETUP FOR LOCAL testing
+
+View the contracts/test folder to see the setup for our mock solidity contract
+To see how we set up our MockV3Aggregator.sol, view the notes in the contracts/deploy/00-deploy-mocks.ts
+
+We also set up helper-hardhat-config.ts as well as our 01-deploy-fund-me.ts file
+
+
+DEPLOYING
+
+In our deploy folder, we have to set up our convention with a number system for hardhat to understand and read our files. The 
+file that starts with 00 will hold our mock files that have methods to support our other contracts we want to deploy. In our case
+00 has our AggregatorV3Interface mock that we need to support the FundMe contract since we have to reference a live feed for value
+pairs that the chainlink oracle will give us.
+We can then add tags to our deploy scripts to selectivly run them when we are testing with our deploy command in the terminal
+
+If everything is set up properly, we can run some lines in termial to see if the code runs properly
+
+To test if our mocks are working fine, we can target the deploy script with the tag "mock" by running....
+npx hardhat deploy --tags mocks
+
+If that runs okay, then we can then test all our contracts deployments by entering...
+npx hardhat deploy
+
+If that runs fine then we are now set up to run our local environment by running...
+npx hardhat node
+
+We need some contracts to reference on our local node, and by setting up our deploy scripts, we now have our contracts set up to 
+test in a local environment!
+
+
+UTILS
+
+Set up our verify script when we go to test this on a real testnet
