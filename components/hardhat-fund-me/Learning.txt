@@ -62,4 +62,46 @@ test in a local environment!
 
 UTILS
 
-Set up our verify script when we go to test this on a real testnet
+Set up our verify script when we go to test this on a real testnet, we are able to verify our contracts.
+
+
+DEPLOY AND verify
+
+npx hardhat deploy --network sepolia
+npx hardhat deploy --network mumbai
+
+All should go well
+
+
+NATSPEC
+
+NatSpec is declared at the top of our contract to share details of our contract to other developers.
+
+solc has a developer documentation generator that uses the comments set up in our FundMe.sol that use the NatSpec format.
+If solc is installed, to use this generator run...
+socl --userdoc --devdoc FundMe.sol
+
+
+TESTING
+
+Unit test are done locally
+Staging test can be done on a testnet (The last stop before mainnet)
+
+Unit
+- local hardhat network || forked hardhat network (Learn about forked later)
+
+An order to work on your testing is in order of your testable functions in your contract by their order. 
+In our case with Fundme, Our order would look something like...
+
+constructor
+receive
+fallback
+fund
+withdraw
+
+This is because this is the order of our functions in our contract.
+
+When we import deployments into our FundMe.test, we have access to some new testing methods. 
+.fixture(["all"]) uses our tags in our deploy scripts
+
+
