@@ -104,4 +104,14 @@ This is because this is the order of our functions in our contract.
 When we import deployments into our FundMe.test, we have access to some new testing methods. 
 .fixture(["all"]) uses our tags in our deploy scripts
 
+Bad news...
 
+Testing went off the rails. None of the test behaved like the video. I am using different versions and not sure
+if there are other factors at play, but for now I am going to skip the unit testing here and revist this later 
+on when I am writting real contracts for myself and explore them then.
+
+
+LEARN ABOUT MEMORY
+
+STORAGE IN SOLIDITY
+LEFT OFF AT 11:44:33

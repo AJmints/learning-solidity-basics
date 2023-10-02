@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 // Pragma
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.7;
 
 // Imports
 import './PriceConverter.sol';
@@ -83,6 +83,9 @@ contract FundMe {
         return priceFeed;
     }
 
+    function getAddressToAmountFunded(address fundingAddress) public view returns (uint256) {
+        return addressToAmountFunded[fundingAddress];
+    }
     
 
     
