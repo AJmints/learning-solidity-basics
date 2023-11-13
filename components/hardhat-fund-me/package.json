@@ -5,5 +5,10 @@
     "ethers": "6.7.1",
     "hardhat": "^2.17.3",
     "solidity-coverage": "^0.8.5"
+  },
+  "scripts": {
+    "test": "npx hardhat test",
+    "test:staging": "npx hardhat test --network sepolia",
+    "lint": "npx solhint 'contracts/*.sol"
   }
 }

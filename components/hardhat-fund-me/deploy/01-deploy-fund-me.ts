@@ -41,15 +41,17 @@ module.exports = async (hre: any) => {
     
 
     const args = [ethUsdPriceFeedAddress]
+    
     const fundMe = await deploy("FundMe", {
         from: deployer,
         args: args,
         log: true,
-        waitConfirmations: network.config.waitConfirmations || 6,
+        waitConfirmations: network.config.waitConfirmations,
     })
 
     if (!developmentChains.includes(network.name && process.env.ETHER_SCAN_API_KEY)) {
-        await verify(fundMe.address, args)
+        // await verify(fundMe.address, args)
+        console.log("Skipped this if statment for local deployment...")
     }
     log("________________________________________________________________")
 }

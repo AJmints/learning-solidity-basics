@@ -16,10 +16,10 @@ describe("FundMe", function () {
     describe("constructor", async function() {
         // NOT WORKING
         // Error: could not decode result data (value="0x", info={ "method": "getPriceFeed", "signature": "getPriceFeed()" }, code=BAD_DATA, version=6.7.1)
-        // it ("sets the aggregator addresses correctly", async function() {
-        //     const response = await fundMe.getPriceFeed()
-        //     assert.equal(response, mockV3Aggregator.target)
-        // })
+        it ("sets the aggregator addresses correctly", async function() {
+            const response = await fundMe.getPriceFeed()
+            assert.equal(response, mockV3Aggregator.target)
+        })
     })
 
     

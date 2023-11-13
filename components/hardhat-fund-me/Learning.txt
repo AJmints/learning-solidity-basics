@@ -155,3 +155,6 @@ function cheaperWithdraw() public payable onlyOwner {
     }
 
 The savings are pretty minimal with this particular case, but it is a valid way to think about gas optimization. 
+
+STAGING TEST
+Left off at... 12.11.43
