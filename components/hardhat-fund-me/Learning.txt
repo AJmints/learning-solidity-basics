@@ -114,4 +114,44 @@ on when I am writting real contracts for myself and explore them then.
 LEARN ABOUT MEMORY
 
 STORAGE IN SOLIDITY
-LEFT OFF AT 11:44:33
+
+
+Storage variables that live inside a contract cost gas. These variables are able to change state and therefor, cost more gas. Storage variables are saved as hexidecimal values. Dynamic variables, like a dynamic array or mapping, that can change length, elements inside the array are saved as a type of hashing function (see documentation). The object saved in the storage slot will have access to the contents of the array, but it stores the length of the array. If we are using an empty array to hold a storage slot, then push a uint256 item into it, it will then be saved into storage slot as the value. This is a topic that is above the scope of my understanding without futher investigation. 
+
+Moving onto constants and immutable variables don't take up space in storage. These items are saved into the contracts bytecode itself.
+
+There is storage space, but there is also memory, which is used for variables in a function. They only need to exist during a fuctions runtime, so stating memory on a variable will save on gas. More on this soon.
+
+When optimizing our solidity contracts, going through the global variables that live on a contract and identifying the variable name with how it being stored is the proper convention. 
+
+Examples: 
+
+Storage variables
+uint256 public s_variableName;
+uint256[] private s_arrayName;
+
+Immutable variables 
+uint256 public immutable i_variableName;
+uint256[] private immutable i_arrayName;
+
+Constant variables
+uint256 public constant VARIABLE_NAME;
+uint256[] private constant ARRAY_NAME;
+
+When you use the memory keyword, you are now saving the relevant information in the memory, so when you continue to access/use that memory, it is available and cost much less gas to access/use. (saved a different way to use much less gas) 
+NOTE: mappings can't be in memory
+
+Using the function below as an example, memory is being used to handle all the computation with the required information, but before making any changes to the variable in storage, we are competing the computation before writting it to storage. As a result, we are saving gas.
+Example: 
+function cheaperWithdraw() public payable onlyOwner {
+        address[] memory funders = s_funders;
+        for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++) { 
+            address funder = funders[funderIndex];
+            s_addressToAmountFunded[funder] = 0;
+        }
+        s_funders = new address[](0);
+        (bool success, ) = i_owner.call{value: address(this).balance}("");
+        require(success);
+    }
+
+The savings are pretty minimal with this particular case, but it is a valid way to think about gas optimization. 

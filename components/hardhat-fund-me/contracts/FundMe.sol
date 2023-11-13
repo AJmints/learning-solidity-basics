@@ -29,12 +29,12 @@ contract FundMe {
 
     // State Variables
     uint256 public constant MINIMUM_USD = 50 * 1e18;
-    address[] public funders;
-    mapping(address => uint256) public addressToAmountFunded;
-    address public i_owner;
+    address[] private s_funders;
+    mapping(address => uint256) private s_addressToAmountFunded;
+    address private immutable i_owner;
     /* Updated constructor, added this new variable, and refactored PriceConverter to adapt to any chain we are on */
     /* This variable uses the AggregatorV3Interface to make our contract variable and modularized for the chain we are connected to */
-    AggregatorV3Interface public priceFeed;
+    AggregatorV3Interface public s_priceFeed;
 
     // Events - None on this contract
 
@@ -56,7 +56,7 @@ contract FundMe {
     // view / pure
     constructor(address priceFeedAddress) {
         i_owner = msg.sender;
-        priceFeed = AggregatorV3Interface(priceFeedAddress);
+        s_priceFeed = AggregatorV3Interface(priceFeedAddress);
     }
 
     // You can leave natspec notes over functions and various parts of your contract to inform others if anything needs clarification. 
@@ -64,30 +64,48 @@ contract FundMe {
      * @notice This contract funds this contract
      */
     function fund() public payable{
-        require(msg.value.getConversionRate(priceFeed) >= MINIMUM_USD, "Didn't send enough!");
-        funders.push(msg.sender);
-        addressToAmountFunded[msg.sender] = msg.value; 
+        require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "Didn't send enough!");
+        s_funders.push(msg.sender);
+        s_addressToAmountFunded[msg.sender] = msg.value; 
     }
 
-    function withdraw() public onlyOwner {
-        for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++) { 
-            address funder = funders[funderIndex];
-            addressToAmountFunded[funder] = 0;
+    function withdraw() public payable onlyOwner {
+        for (uint256 funderIndex = 0; funderIndex < s_funders.length; funderIndex++) { 
+            address funder = s_funders[funderIndex];
+            s_addressToAmountFunded[funder] = 0;
         }
-        funders = new address[](0);
+        s_funders = new address[](0);
         (bool callSuccess,) = payable(msg.sender).call{value: address(this).balance}("");
         if (!callSuccess) { revert FundMe__CallFailed(); }
     }
 
-    function getPriceFeed() public view returns (AggregatorV3Interface) {
-        return priceFeed;
+    function cheaperWithdraw() public payable onlyOwner {
+        address[] memory funders = s_funders;
+        for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++) { 
+            address funder = funders[funderIndex];
+            s_addressToAmountFunded[funder] = 0;
+        }
+        s_funders = new address[](0);
+        (bool success, ) = i_owner.call{value: address(this).balance}("");
+        require(success);
     }
+    
 
+    // Getters
+
+    function getOwner() public view returns(address) {
+        return i_owner;
+    }
+    
+    function getFunder(uint256 index) public view returns(address) {
+        return s_funders[index];
+    }
+    
     function getAddressToAmountFunded(address fundingAddress) public view returns (uint256) {
-        return addressToAmountFunded[fundingAddress];
+            return s_addressToAmountFunded[fundingAddress];
     }
-    
 
-    
-
+    function getPriceFeed() public view returns (AggregatorV3Interface) {
+        return s_priceFeed;
+    }
 }
