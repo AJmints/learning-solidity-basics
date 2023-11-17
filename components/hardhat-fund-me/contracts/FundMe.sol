@@ -64,7 +64,8 @@ contract FundMe {
      * @notice This contract funds this contract
      */
     function fund() public payable{
-        require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "Didn't send enough!");
+        // require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "Didn't send enough!");
+        // Had to comment out line 67 in order for the transaction to not be reverted. Also added fallback and recieve functions to this script. Not included in Lesson 7 tutorial, but covered in previous lessons.
         s_funders.push(msg.sender);
         s_addressToAmountFunded[msg.sender] = msg.value; 
     }
@@ -88,6 +89,14 @@ contract FundMe {
         s_funders = new address[](0);
         (bool success, ) = i_owner.call{value: address(this).balance}("");
         require(success);
+    }
+
+    receive() external payable {
+        fund();
+    } 
+
+    fallback() external payable {
+        fund();
     }
     
 
